@@ -29,29 +29,41 @@ const WalletChecker: React.FC = () => {
   };
 
   return (
-    <div>
-      <h1>Check your wallet balance</h1>
-      <div className="relative w-1/2 mb-4 mx-auto my-auto">
-        <div className="relative flex items-center bg-[#1e1e1e] rounded-full p-2 overflow-hidden transition-all duration-300 ease-in-out hover:shadow-[0_0_15px_rgba(255,255,255,0.2)] focus-within:shadow-[0_0_30px_rgba(255,255,255,0.4)]">
+    <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col items-center justify-center px-4 -mt-24">
+      <h1 className="sm:text-5xl font-[Georgia] font-bold mb-10 text-white text-center text-3xl">
+        Check Your Wallet Balance
+      </h1>
+      <div className="w-full max-w-md bg-[#2c2c2c] p-6 rounded-lg shadow-md">
+        <div className="mb-4">
+          <label
+            htmlFor="walletAddress"
+            className="block text-sm font-medium text-gray-400 mb-2"
+          >
+            Wallet Address
+          </label>
           <input
             type="text"
-            className="w-full border-none bg-transparent text-white text-base px-2 py-2 outline-none placeholder-gray-400"
-            placeholder="Search..."
+            id="walletAddress"
+            className="w-full bg-[#393939] text-white rounded-lg py-2 px-3 outline-none focus:ring-2 focus:ring-yellow-500"
+            placeholder="Enter wallet address..."
+            value={walletAddress}
+            onChange={(e) => setWalletAddress(e.target.value)}
           />
-          <div className="flex items-center justify-center p-2 bg-black rounded-full ml-2 cursor-pointer transition-colors duration-300 ease-in-out hover:bg-gray-950">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="24"
-              viewBox="0 0 24 24"
-              width="24"
-              className="fill-white"
-            >
-              <path d="M0 0h24v24H0z" fill="none"></path>
-              <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
-            </svg>
-          </div>
         </div>
-        <div className="absolute top-1/2 left-1/2 w-full h-[200%] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.1),transparent)] transition-all duration-500 ease-in-out transform scale-0 z-[-1] hover:scale-100 focus-within:scale-[1.2]"></div>
+        <button
+          onClick={handleCheckBalance}
+          className="w-full bg-black hover:bg-gray-950 duration-200 border-yellow-500 text-white font-medium py-2 rounded-lg transition-colors"
+        >
+          Check Balance
+        </button>
+        {error && (
+          <p className="text-red-500 text-sm font-medium mt-4">{error}</p>
+        )}
+        {solBalance !== null && (
+          <p className="text-green-500 text-sm font-medium mt-4">
+            Balance: {solBalance} SOL
+          </p>
+        )}
       </div>
     </div>
   );

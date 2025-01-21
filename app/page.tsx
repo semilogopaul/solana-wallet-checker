@@ -10,6 +10,7 @@ const Home: React.FC = () => {
       <main className="container mx-auto">
         <WalletChecker />
       </main>
+      <script src="./scripts.js" />
     </div>
   );
 };
